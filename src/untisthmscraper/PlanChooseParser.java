@@ -27,8 +27,8 @@ import org.jsoup.select.Elements;
  */
 public class PlanChooseParser extends Thread{
 
-    private static final String MAINURL = "https://homepages-fb.thm.de/plaene/stundenplan/Kla1.htm";
-    private final URL url = new URL("https://homepages-fb.thm.de/plaene/stundenplan/Kla1.htm");
+    private static final String MAINURL = "http://homepages-fb.thm.de/plaene/stundenplan/Kla1.htm";
+    private final URL url = new URL("http://homepages-fb.thm.de/plaene/stundenplan/Kla1.htm");
     private final Document wdoc;
     private final LinkedHashMap<String, String> items;
     public final String[] kuerzel;
