@@ -27,11 +27,11 @@ import org.jsoup.select.Elements;
  */
 public class PlanChooseParser extends Thread{
 
-    private static final String MAINURL = "http://homepages-fb.thm.de/plaene/stundenplan/Kla1.htm";
-    private final URL url = new URL("http://homepages-fb.thm.de/plaene/stundenplan/Kla1.htm");
-    private final Document wdoc;
+    private static final String                 MAINURL = "http://homepages-fb.thm.de/plaene/stundenplan/Kla1.htm";
+    private final URL                           url     = new URL(MAINURL);
+    private final Document                      wdoc;
     private final LinkedHashMap<String, String> items;
-    public final String[] kuerzel;
+    public final String[]                       kuerzel;
 
     public PlanChooseParser() throws IOException {
         Document tmp = null;
@@ -55,49 +55,42 @@ public class PlanChooseParser extends Thread{
         this.items = getItems();
         this.kuerzel = computeKuerzel();
     }
-    public String[] getKuerzel(){return this.kuerzel;}
-    private String[] computeKuerzel() {
-        ArrayList<String> kuerzel1;
-        kuerzel1 = new ArrayList<>();
-        ArrayList<String> kuerzel2 = new ArrayList<>();
-
+    
+    public  String[]                      getKuerzel(){return this.kuerzel;}
+    private String[]                      computeKuerzel() {
+        ArrayList<String>              kuerzel1;
+                                       kuerzel1 = new ArrayList<>();
+        ArrayList<String>              kuerzel2 = new ArrayList<>();
         Set<Map.Entry<String, String>> entrySet = items.entrySet();
 
         entrySet.stream().forEach((Map.Entry<String, String> m) -> {
-            kuerzel1.add(m.getKey());
-        });
+            kuerzel1.add(m.getKey());});
 
         kuerzel1.stream().forEach((Consumer<? super String>) (s) -> {
             try {
                 kuerzel2.add(s.substring(0, 3));
             } catch (StringIndexOutOfBoundsException e) {
-            }
-        });
+            }});
 
-        HashSet set = new HashSet<>(kuerzel2);
-
+        HashSet           set      = new HashSet<>(kuerzel2);
         ArrayList<String> kuerzel3 = new ArrayList<>(set);
-        kuerzel3.sort(null);
-        String[] subList = new String[kuerzel3.size()];
+                          kuerzel3.sort(null);                          
+        String[]          subList  = new String[kuerzel3.size()];
         
         kuerzel3.stream().forEach(new Consumer<String>() {
             int i=0;
             public void accept(String s) {
                 subList[i] = s;
-                i++;
-            }
-        });
+                i++; }});
         
 
         return subList;
-    }
-    
+        }   
     private LinkedHashMap<String, String> getItems() {
         Map<String, String> imap;
-        imap = new LinkedHashMap<>();
-        Elements links = wdoc.select("body center table tbody tr td a");
-
-        links.stream().forEach((Element link) -> {
+                            imap = new LinkedHashMap<>();
+        Elements            links = wdoc.select("body center table tbody tr td a");
+                            links.stream().forEach((Element link) -> {
             try {
                 Object put = imap.put(link.text(), (url.getProtocol() + "://"
                         + url.getAuthority()+"/plaene/stundenplan/"+link.attr("href")));
@@ -107,12 +100,13 @@ public class PlanChooseParser extends Thread{
         });
         return (LinkedHashMap<String, String>) imap;
     }
-    public String[] getPlaene(String s) {
+    public  String[]                      getPlaene(String s) {
         
-        Set<String> keySet = this.items.keySet();
+        Set<String>      keySet = this.items.keySet();
         Iterator<String> iterator = keySet.iterator();
-        String[] output = new String[10];
-        int i = 0;
+        String[]         output = new String[10];
+        int              i = 0;
+        
         while(iterator.hasNext()) {
             String item = iterator.next();
             if(item.startsWith(s)){
@@ -123,11 +117,12 @@ public class PlanChooseParser extends Thread{
             }
         }
      return output;   
-    }
-    public String[] getLinks(String[] inputList) {
+    }   
+    public  String[]                      getLinks(String[] inputList) {
         
         String[] output = new String[inputList.length];
-        int i = 0;
+        int      i      = 0;
+        
         for(String s : inputList) {
             output[i] = this.items.get(s);
             //System.out.println(this.items.get(s));

@@ -133,11 +133,12 @@ public class UI extends javax.swing.JFrame {
     private void HTMLgenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HTMLgenButtonActionPerformed
         
         try {
-            List selectedValuesList = ListOPlans.getSelectedValuesList();
-            Iterator iterator = selectedValuesList.iterator();
-            int i = 0;
+            List     selectedValuesList = ListOPlans.getSelectedValuesList();
+            Iterator iterator           = selectedValuesList.iterator();
+            int      i                  = 0;
             String[] keys;
-            keys = new String[selectedValuesList.size()];
+                     keys               = new String[selectedValuesList.size()];
+            
             while(iterator.hasNext()) {
                 keys[i] = (String) iterator.next();
                 i++;
@@ -145,11 +146,11 @@ public class UI extends javax.swing.JFrame {
             
             
             String[] links;
-            links = parser.getLinks(keys);
+                     links = parser.getLinks(keys);
             UntisTable table = new UntisTable(links);
-            
-            
             UntisTable.createOutputFile(table.HTMLGen());
+            
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {

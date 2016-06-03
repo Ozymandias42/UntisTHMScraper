@@ -1,3 +1,5 @@
 *jsoup*
 *.html
 *.class
+.vscode/
+build/

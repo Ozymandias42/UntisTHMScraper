@@ -17,21 +17,14 @@ import java.net.URISyntaxException;
  */
 public abstract class ResultOpener {
 
-    
-
     private static final String FILE = "out.html";
 
     public static void open() throws MalformedURLException, URISyntaxException, IOException {
         String currDir;
-        File file;
-        currDir = System.getProperty("user.dir");
-
-        
+               currDir = System.getProperty("user.dir");
+        File   file;        
             file = new File((currDir + System.getProperty("file.separator") + FILE));
-            
-        
-        
-        
+                                                
         try {
             Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e) {
