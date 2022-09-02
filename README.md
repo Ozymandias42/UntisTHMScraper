@@ -1,3 +1,5 @@
+# [Archived]
+
 # UntisTHMScraper
 Ein WebScraper für das Untis Stundenplan System der THM Friedberg
 
